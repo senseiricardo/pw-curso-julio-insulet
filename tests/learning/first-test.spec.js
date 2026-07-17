@@ -23,7 +23,7 @@ test('My First Test in PW', async ({ page }) => {
 
     // page.locator()
 
-    await page.locator('[name="user-name"]').fill('standard_user')
+    await page.locator('[name="user-name"]').type('standard_user')
     await page.locator('[data-test="password"]').fill('secret_sauce')
 
     // page.getByRole = toma el objeto de a cuerdo a su tipo
@@ -31,5 +31,45 @@ test('My First Test in PW', async ({ page }) => {
 
     // page.getByText() = Interactuar con el elemento basado en su texto
     await page.getByText('Sauce Labs Backpack').click()
+
+    // Acciones mas comunes en PW
+    /**
+     * Click
+     * fill -> escribir texto en un input
+     * type -> simular el teclado carecter por caracter
+     * hover -> mover el mouse sobre el elemento
+     * check -> marcar checkbox
+     * uncheck -> desmarcar un checkbox
+     * selectOption -> seleccionar un valor de dropdown
+     * press -> presionar alguna
+     */
+
+    // Assertions
+
+    // Ejemplos que podemos validar:
+
+     /**
+      * 
+      * Que un elemento sea visible
+      * que una pagina este en la URL especifica
+      * Que un elemento tenga cierto texto
+      * Que un elemento NO exista
+      * Que sea la cantidad esperada de elementos 
+      * 
+      * Playwright:
+      * 
+      * expect()
+      * 
+      * Assertions mas comunes:
+      * 
+      * toBeVisible
+      * toHaveText
+      * toContainText
+      * toHaveURL
+      * toHaveValue
+      * toHaveCount
+      */
+
+     await expect(page).toHaveURL('https://www.saucedemo.com/inventory-item.html?id=4')
 
 });
