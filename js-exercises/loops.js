@@ -22,4 +22,10 @@ do{
 } while(doNumero <=20)
 
 // Ejercicio en clase: contador del 2 al 20 pero tiene que ser de 2 en 2
-// Ejemplo: 2,4,6,8,10
+// Ejemplo: 2,4,6,8,10,,,20
+
+// Pista: se puede utilizar el operador de modulo (%)
+console.log("----Ejercicio------")
+for(let i = 1; i<=10; i++){
+    console.log(i*2)
+}

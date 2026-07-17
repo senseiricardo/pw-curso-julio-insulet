@@ -7,7 +7,7 @@ module.exports = defineConfig({
     headless: false, // Opcional: para que se vea el navegador
     //headless: process.env.CI ? true : false, // GitHub Actions
     launchOptions: {
-      slowMo: 10 // Wait entre acciones para mostrar en clase
+      slowMo: 1000 // Wait entre acciones para mostrar en clase
     },
     /**
    * 📸 SCREENSHOT OPTIONS
