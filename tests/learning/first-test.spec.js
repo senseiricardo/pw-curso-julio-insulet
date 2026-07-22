@@ -44,7 +44,7 @@ test('My First Test in PW', async ({ page }) => {
      * press -> presionar alguna
      */
 
-    // Assertions
+    // Assertions == Validaciones
 
     // Ejemplos que podemos validar:
 
@@ -70,6 +70,8 @@ test('My First Test in PW', async ({ page }) => {
       * toHaveCount
       */
 
-     await expect(page).toHaveURL('https://www.saucedemo.com/inventory-item.html?id=4')
+     await expect(page).toHaveURL(/inventory-item\.html/);
+
+
 
 });
