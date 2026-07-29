@@ -26,7 +26,7 @@ module.exports = defineConfig({
    * 'on-first-retry' → graba solo cuando el test se reintenta
    * 'off' → no graba video
    */
-  video: 'on',
+  video: 'off',
 
   /**
    * 🔍 TRACE OPTIONS (DEBUGGING PRO)
