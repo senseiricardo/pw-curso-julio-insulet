@@ -42,4 +42,21 @@ test.describe('Login - Test suite', () =>{
 
 
     })
+
+    test('TC03 - Login Bloqueado', async ({ page, context }) => {
+
+        const loginPage = new LoginPage(page);
+        const inventoryPage = new InventoryPage(page)
+
+        // Launch browser
+        await loginPage.goto()
+
+        // Enter valid credentials
+        await loginPage.login(users.locked.username,users.locked.password)
+
+        // Verificar mensaje de error
+        await loginPage.verifyErrorMessage("Sorry, this user has been locked out.")
+
+
+    })
 })
