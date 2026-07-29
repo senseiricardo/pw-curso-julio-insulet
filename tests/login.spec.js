@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test'
 import { LoginPage } from '../pages/login.page.js'
 import { InventoryPage } from '../pages/inventory.page.js'
+import { users } from '../data/users.js'
 
 // Test Suites = Agrupador de Tests
 test.describe('Login - Test suite', () =>{
@@ -13,7 +14,11 @@ test.describe('Login - Test suite', () =>{
         await loginPage.goto()
 
         // Enter valid credentials
-        await loginPage.login("standard_user","secret_sauce")
+        //username = users.standard.username
+        //password = users.standard.password
+        //await loginPage.login(username,password)
+
+        await loginPage.login(users.standard.username,users.standard.password)
 
         // Validate user is logged
         await expect(page).toHaveURL(/inventory.html/)
@@ -30,7 +35,7 @@ test.describe('Login - Test suite', () =>{
         await loginPage.goto()
 
         // Enter valid credentials
-        await loginPage.login("standard_user","wrong_password")
+        await loginPage.login(users.wrong.username,users.wrong.password)
 
         // Verificar mensaje de error
         await loginPage.verifyErrorMessage("Username and password do not match any user in this service")
