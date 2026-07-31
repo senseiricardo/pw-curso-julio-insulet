@@ -1,5 +1,5 @@
 // playwright.config.js
-const { defineConfig } = require('@playwright/test');
+const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   reporter: [['html', { open: 'off' }]], // Genera y abre el reporte automáticamente
@@ -47,4 +47,53 @@ module.exports = defineConfig({
   testDir: './tests',
   fullyParallel: true,
   workers: 4,
+
+      /**
+   * 🌐 CROSS BROWSER TESTING
+   *
+   * Cada proyecto representa un navegador diferente.
+   *
+   * Chrome   → Motor de Google Chrome
+   * Chromium → Motor de Google Chrome y Microsoft Edge
+   * Firefox  → Mozilla Firefox
+   * WebKit   → Motor de Safari
+   *
+   * Si ejecutas:
+   * npx playwright test
+   *
+   * Los tests correrán automáticamente en los 3 navegadores.
+   */
+  projects: [
+  {
+    name: 'Google Chrome',
+    use: {
+      ...devices['Desktop Chrome'],
+      channel: 'chrome',
+    },
+  },
+  {
+    name: 'Chromium',
+    use: {
+      ...devices['Desktop Chrome'],
+    },
+  },
+  {
+    name: 'Firefox',
+    use: {
+      ...devices['Desktop Firefox'],
+    },
+  },
+  {
+    name: 'WebKit',
+    use: {
+      ...devices['Desktop Safari'],
+    },
+  },
+  {
+    name: 'iPhone 15',
+    use: {
+      ...devices['iPhone 15'],
+    },
+  },
+],
 });
