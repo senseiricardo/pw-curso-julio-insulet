@@ -3,15 +3,52 @@ import { LoginPage } from '../pages/login.page.js'
 import { InventoryPage } from '../pages/inventory.page.js'
 import { users } from '../data/users.js'
 
-// Test Suites = Agrupador de Tests
-test.describe('Login - Test suite', () =>{
-    test('TC01 - Login Exitoso', async ({ page, context }) => {
+// Hooks = Listeners (Version antigua)
 
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page)
+//**
+// beforeAll  -> Corre una vez antes de todos los tests
+// beforeEach -> Corre antes de cada test
+// afterEach  -> Correr despues de cada test
+// afterAll   -> Corre una vez al final de las pruebas
+//  */
+
+//**
+// WORKERS (PARALELIZACION)
+// 
+// Cuando tener cuidado con los workers?
+// 1- Los tests sean independientes
+// 2- No contengan datos sensibles
+// 3- Un test afecte a otro test por ejecutarse al mismo tiempo
+//  */
+
+// Test Suites = Agrupador de Tests
+test.describe('Login - Test suite', () =>{ // Test Suite
+
+    let loginPage;
+    let inventoryPage;
+
+    test.beforeAll(async () => {
+        console.log("Before All - Setup global")
+    })
+
+    test.beforeEach(async ({page}) => {
+        console.log("Before Each - Test")
+        loginPage = new LoginPage(page);
+        inventoryPage = new InventoryPage(page)
 
         // Launch browser
         await loginPage.goto()
+    })
+
+    test.afterEach(async () => {
+        console.log("After Each - Test")
+    })
+
+    test.afterAll(async () => {
+        console.log("After All - Clean Tests")
+    })
+
+    test('TC01 - Login Exitoso', async ({ page, context }) => {
 
         // Enter valid credentials
         //username = users.standard.username
@@ -28,12 +65,6 @@ test.describe('Login - Test suite', () =>{
 
     test('TC02 - Login Invalido', async ({ page, context }) => {
 
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page)
-
-        // Launch browser
-        await loginPage.goto()
-
         // Enter valid credentials
         await loginPage.login(users.wrong.username,users.wrong.password)
 
@@ -45,18 +76,11 @@ test.describe('Login - Test suite', () =>{
 
     test('TC03 - Login Bloqueado', async ({ page, context }) => {
 
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page)
-
-        // Launch browser
-        await loginPage.goto()
-
         // Enter valid credentials
         await loginPage.login(users.locked.username,users.locked.password)
 
         // Verificar mensaje de error
-        await loginPage.verifyErrorMessage("Sorry, this user has been locked out.")
-
+        await loginPage.verifyErrorMessage("Otro mensaje")
 
     })
 })
