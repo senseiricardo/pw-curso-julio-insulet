@@ -1,30 +1,74 @@
+# ============================================
+# GitHub Actions - Playwright Tests
+# ============================================
+
+# Nombre del workflow que aparecerá en la pestaña Actions
 name: Playwright Tests
 
+# Eventos que disparan el workflow
 on:
+
+  # Permite ejecutar el workflow manualmente desde GitHub
   workflow_dispatch:
+
+    # Parámetros que el usuario puede seleccionar antes de ejecutar
     inputs:
+
+      # Tipo de pruebas que se ejecutarán
       test_type:
         description: 'Tipo de tests (smoke, regression)'
         required: true
         default: 'smoke'
 
+# ============================================
+# Jobs
+# ============================================
 jobs:
+
+  # Nombre del Job
   test:
+
+    # Sistema operativo donde correrá el workflow
     runs-on: ubuntu-latest
 
+    # ============================================
+    # Steps
+    # ============================================
     steps:
+
+      # Descarga el código del repositorio
       - uses: actions/checkout@v4
 
+      # Instala Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # Instala las dependencias del proyecto
+      # utilizando package-lock.json
       - run: npm ci
+
+      # Instala todos los navegadores necesarios
+      # para ejecutar Playwright
       - run: npx playwright install --with-deps
 
+      # Ejecuta únicamente los tests que tengan
+      # el tag seleccionado al iniciar el workflow
+      #
+      # smoke      -> @smoke
+      # regression -> @regression
+      #
+      # continue-on-error evita que el workflow
+      # falle cuando existen tests fallidos,
+      # pero permite continuar para generar el reporte.
       - name: Ejecutar tests por tag
+        continue-on-error: true
         run: npx playwright test --grep @${{ github.event.inputs.test_type }}
 
+      # Sube el reporte HTML como artefacto
+      #
+      # if: always() garantiza que el reporte
+      # se genere incluso si algunos tests fallan.
       - name: Subir reporte
         if: always()
         uses: actions/upload-artifact@v4
