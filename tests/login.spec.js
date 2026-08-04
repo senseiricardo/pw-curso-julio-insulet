@@ -22,7 +22,7 @@ import { users } from '../data/users.js'
 //  */
 
 // Test Suites = Agrupador de Tests
-test.describe('Login - Test suite', () =>{ // Test Suite
+test.describe('@regression Login - Test suite', () =>{ // Test Suite
 
     let loginPage;
     let inventoryPage;
