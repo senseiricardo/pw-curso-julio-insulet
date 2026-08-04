@@ -4,8 +4,8 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
   reporter: [['html', { open: 'off' }]], // Genera y abre el reporte automáticamente
   use: {
-    headless: false, // Opcional: para que se vea el navegador
-    //headless: process.env.CI ? true : false, // GitHub Actions
+    //headless: false, // Opcional: para que se vea el navegador
+    headless: process.env.CI ? true : false, // GitHub Actions
     launchOptions: {
       slowMo: 1000 // Wait entre acciones para mostrar en clase
     },
