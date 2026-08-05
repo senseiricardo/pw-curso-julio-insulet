@@ -63,37 +63,5 @@ module.exports = defineConfig({
    *
    * Los tests correrán automáticamente en los 3 navegadores.
    */
-  projects: [
-  {
-    name: 'Google Chrome',
-    use: {
-      ...devices['Desktop Chrome'],
-      channel: 'chrome',
-    },
-  },
-  {
-    name: 'Chromium',
-    use: {
-      ...devices['Desktop Chrome'],
-    },
-  },
-  {
-    name: 'Firefox',
-    use: {
-      ...devices['Desktop Firefox'],
-    },
-  },
-  {
-    name: 'WebKit',
-    use: {
-      ...devices['Desktop Safari'],
-    },
-  },
-  {
-    name: 'iPhone 15',
-    use: {
-      ...devices['iPhone 15'],
-    },
-  },
-],
+  
 });
